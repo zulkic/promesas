@@ -86,3 +86,4 @@ opf("S")
 // resultadoUnitario(nomina[1].estado)]
 
 "agregando nuevas lineas"
+"agregando nuevas lineas"
