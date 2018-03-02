@@ -81,3 +81,6 @@ opf("S")
     .then(nomina => Promise.all(orquestador(nomina))
         .then(resultados => imprimeResultados(resultados)))
     .catch(err => console.log(err));
+
+// [resultadoUnitario(nomina[0].estado),
+// resultadoUnitario(nomina[1].estado)]
