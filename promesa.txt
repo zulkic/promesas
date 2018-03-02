@@ -1,0 +1,86 @@
+var valor = "S";
+
+var nominas = [{
+        "estado": 4500
+    }, {
+        "estado": 2000
+    },
+    {
+        "estado": 3000
+    }, {
+        "estado": 4000
+    },
+    {
+        "estado": 50
+    }, {
+        "estado": 3500
+    },
+    {
+        "estado": 2500
+    }, {
+        "estado": 1500
+    }
+]
+
+
+function opf(valor) {
+    return new Promise(function (resolve, reject) {
+        if (valor == "S") {
+            resolve(valor);
+        } else {
+            reject('Ocurrio un error en opf');
+        }
+    })
+}
+
+function nominaRuta2(b) {
+    return new Promise(function (resolve, reject) {
+        if (b == "S") {
+            console.log("ESTOY ACA");
+            resolve(nominas);
+        } else {
+            reject("Ocurrio un error");
+        }
+    })
+}
+
+function resultadoUnitario(estado) {
+    return new Promise(function (resolve, reject) {
+        var x = Math.floor((Math.random() * 10) + 1);
+        console.log("Ahora estoy aca",x);
+        setTimeout(() => {
+            if (x <= 9)
+                resolve(estado);
+            else
+                reject('El resultado es mayor en timeout' + estado);
+        }, estado);
+    })
+}
+
+function imprimeResultados(resultados) {
+    console.log(resultados.length);
+    for (var index = 0; index < resultados.length; index++) {
+        console.log(resultados[index]);
+    }
+}
+
+function orquestador(nom) {
+    var mapa = [];
+
+    for (var index = 0; index < nom.length; index++) {
+        var element = resultadoUnitario(nom[index].estado);
+        mapa.push(element);
+    }
+    return mapa;
+
+}
+
+
+opf("S")
+    .then(valor => nominaRuta2(valor))
+    .then(nomina => Promise.all(orquestador(nomina))
+        .then(resultados => imprimeResultados(resultados)))
+    .catch(err => console.log(err));
+
+// [resultadoUnitario(nomina[0].estado),
+// resultadoUnitario(nomina[1].estado)]
